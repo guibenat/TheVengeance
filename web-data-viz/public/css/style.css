@@ -166,10 +166,6 @@ header {
   border: none;
 }
 
-.btn-batman:hover {
-  background-color: #E72B29;
-}
-
 .carrossel-historia {
   display: flex;
   gap: 32px;
@@ -183,12 +179,6 @@ header {
   width: 200px;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-historia:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(231, 43, 41, 0.4);
 }
 
 .card-historia img {
