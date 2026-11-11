@@ -37,10 +37,6 @@
 
       <div class="formulario">
         <div class="campo">
-          <span>Código de ativação</span>
-          <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-        </div>
-        <div class="campo">
           <span>Name</span>
           <input id="nome_input" type="text" placeholder="Enter your name" />
         </div>
@@ -115,7 +111,6 @@
       document.getElementById('div_aguardar').style.display = 'none';
     }
     function limparFormulario() {
-      document.getElementById('codigo_input').value = '';
       document.getElementById('nome_input').value = '';
       document.getElementById('email_input').value = '';
       document.getElementById('senha_input').value = '';
@@ -127,15 +122,13 @@
       var emailVar = email_input.value;
       var senhaVar = senha_input.value;
       var confirmacaoSenhaVar = confirmacao_senha_input.value;
-      var codigoVar = codigo_input.value;
       var idEmpresaVincular;
 
       if (
         nomeVar == "" ||
         emailVar == "" ||
         senhaVar == "" ||
-        confirmacaoSenhaVar == "" ||
-        codigoVar == ""
+        confirmacaoSenhaVar == ""
       ) {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
@@ -143,19 +136,6 @@
         return false;
       } else {
         setInterval(sumirMensagem, 5000);
-      }
-
-      for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-        if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-          idEmpresaVincular = listaEmpresasCadastradas[i].id;
-          console.log("Código de ativação válido.");
-          break;
-        } else if (i == listaEmpresasCadastradas.length - 1) {
-          cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "Código de ativação inválido.";
-          finalizarAguardar();
-          return false;
-        }
       }
 
       fetch("/usuarios/cadastrar", {
@@ -191,23 +171,6 @@
 
       return false;
     }
-
-    function listar() {
-      fetch("/empresas/listar", {
-        method: "GET",
-      })
-        .then(function (resposta) {
-          resposta.json().then((empresas) => {
-            empresas.forEach((empresa) => {
-              listaEmpresasCadastradas.push(empresa);
-            });
-          });
-        })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-        });
-    }
-
     function sumirMensagem() {
       cardErro.style.display = "none";
     }
