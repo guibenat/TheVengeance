@@ -1,179 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vengeance | Cadastro</title>
 
-  <title>Vengeance | Cadastro</title>
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/cadLog.css" />
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-  <script src="./js/sessao.js"></script>
-  <link rel="stylesheet" href="./css/cadLog.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-</head>
-
-<body onload="listar()">
-  <div class="alerta_erro">
-    <div class="card_erro" id="cardErro">
-      <span id="mensagem_erro"></span>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="left-panel">
-      <img src="./assets/icon/logo.png" alt="Logo The Vengeance" class="logo" />
-
-      <h1>Get started now</h1>
-      <p class="subtitle">Enter your credentials to access your account</p>
-
-      <div class="toggle-tabs">
-        <button class="toggle-btn active">Email</button>
-        <button class="toggle-btn">Phone</button>
-      </div>
-
-      <div class="formulario">
-        <div class="campo">
-          <span>Name</span>
-          <input id="nome_input" type="text" placeholder="Enter your name" />
-        </div>
-        <div class="campo">
-          <span>Email</span>
-          <input id="email_input" type="text" placeholder="Enter your email" />
-        </div>
-        <div class="campo">
-          <span>Password</span>
-          <input id="senha_input" type="password" placeholder="******" />
-        </div>
-        <div class="campo">
-          <span>Confirm Password</span>
-          <input id="confirmacao_senha_input" type="password" placeholder="******" />
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms">
-          <label for="terms">I agree to the <a href="#">terms of Service</a></label>
-        </div>
-
-        <button class="botao" onclick="cadastrar()">Sign up</button>
-      </div>
-
-      <div id="div_aguardar" class="loading-div">
-        <img src="./assets/circle-loading.gif" id="loading-gif" width="40" />
-      </div>
-      <div id="div_erros_login"></div>
-    </div>
-
-    <div class="right-panel">
-      <div class="news-title">NEWS</div>
-      
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="track">
-          <img src="assets/imgs/penguinPoster.png" alt="News 1">
-          <img src="assets/imgs/batmanPoster.png" alt="News 2">
-          <img src="assets/imgs/caraDeBarroPoster.png" alt="News 3">
-        </div>
-      </div>
-
-      <div class="indicators" id="indicators">
-        <div class="dot active"><div class="dot-fill"></div></div>
-        <div class="dot"><div class="dot-fill"></div></div>
-        <div class="dot"><div class="dot-fill"></div></div>
+  <body onload="listar()">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
       </div>
     </div>
-  </div>
-  
-  <script>
-    const track = document.getElementById('track');
-    const dots = document.querySelectorAll('.dot');
-    let slideAtual = 0;
-    const tempoIntervalo = 5000; 
 
-    function moverCarrossel() {
-      slideAtual = (slideAtual + 1) % dots.length;
-      track.style.transform = `translateX(-${slideAtual * 100}%)`;
+    <div class="container">
+      <div class="left-panel">
+        <img
+          src="./assets/icon/logo.png"
+          alt="Logo The Vengeance"
+          class="logo"
+        />
 
-      dots.forEach(dot => {
-        dot.classList.remove('active');
-        void dot.offsetWidth; 
-      });
-      dots[slideAtual].classList.add('active');
-    }
+        <h1>Get started now</h1>
+        <p class="subtitle">Enter your credentials to access your account</p>
 
-    setInterval(moverCarrossel, tempoIntervalo);
+        <div class="toggle-tabs">
+          <button class="toggle-btn active">Email</button>
+          <button class="toggle-btn">Phone</button>
+        </div>
 
-    let listaEmpresasCadastradas = [];
+        <div class="formulario">
+          <div class="campo">
+            <span>Name</span>
+            <input id="nome_input" type="text" placeholder="Enter your name" />
+          </div>
+          <div class="campo">
+            <span>Email</span>
+            <input
+              id="email_input"
+              type="text"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div class="campo">
+            <span>Password</span>
+            <input id="senha_input" type="password" placeholder="******" />
+          </div>
+          <div class="campo">
+            <span>Confirm Password</span>
+            <input
+              id="confirmacao_senha_input"
+              type="password"
+              placeholder="******"
+            />
+          </div>
 
-    function finalizarAguardar() {
-      document.getElementById('div_aguardar').style.display = 'none';
-    }
-    function limparFormulario() {
-      document.getElementById('nome_input').value = '';
-      document.getElementById('email_input').value = '';
-      document.getElementById('senha_input').value = '';
-      document.getElementById('confirmacao_senha_input').value = '';
-    }
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" />
+            <label for="terms"
+              >I agree to the <a href="#">terms of Service</a></label
+            >
+          </div>
 
-    function cadastrar() {
-      var nomeVar = nome_input.value;
-      var emailVar = email_input.value;
-      var senhaVar = senha_input.value;
-      var confirmacaoSenhaVar = confirmacao_senha_input.value;
-      var idEmpresaVincular;
+          <button class="botao" onclick="cadastrar()">Sign up</button>
+        </div>
 
-      if (
-        nomeVar == "" ||
-        emailVar == "" ||
-        senhaVar == "" ||
-        confirmacaoSenhaVar == ""
-      ) {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
-        finalizarAguardar();
-        return false;
-      } else {
-        setInterval(sumirMensagem, 5000);
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/circle-loading.gif" id="loading-gif" width="40" />
+        </div>
+        <div id="div_erros_login"></div>
+      </div>
+
+      <div class="right-panel">
+        <div class="news-title">NEWS</div>
+
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="track">
+            <img src="assets/imgs/penguinPoster.png" alt="News 1" />
+            <img src="assets/imgs/batmanPoster.png" alt="News 2" />
+            <img src="assets/imgs/caraDeBarroPoster.png" alt="News 3" />
+          </div>
+        </div>
+
+        <div class="indicators" id="indicators">
+          <div class="dot active"><div class="dot-fill"></div></div>
+          <div class="dot"><div class="dot-fill"></div></div>
+          <div class="dot"><div class="dot-fill"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const track = document.getElementById("track");
+      const dots = document.querySelectorAll(".dot");
+      let slideAtual = 0;
+      const tempoIntervalo = 5000;
+      const maxTentativa = 5;
+      const tempoBloqueio = 30000;
+      let tentativa = 0;
+      let timerMensagem;
+      let timerBloqueio;
+
+      function moverCarrossel() {
+        slideAtual = (slideAtual + 1) % dots.length;
+        track.style.transform = `translateX(-${slideAtual * 100}%)`;
+
+        dots.forEach((dot) => {
+          dot.classList.remove("active");
+          void dot.offsetWidth;
+        });
+        dots[slideAtual].classList.add("active");
       }
 
-      fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nomeServer: nomeVar,
-          emailServer: emailVar,
-          senhaServer: senhaVar,
-          idEmpresaVincularServer: idEmpresaVincular
-        }),
-      })
-        .then(function (resposta) {
-          console.log("resposta: ", resposta);
-          if (resposta.ok) {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando...";
-            setTimeout(() => {
-              window.location = "login.html";
-            }, 2000);
-            limparFormulario();
-            finalizarAguardar();
-          } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
-          }
-        })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-          finalizarAguardar();
-        });
+      setInterval(moverCarrossel, tempoIntervalo);
 
-      return false;
-    }
-    function sumirMensagem() {
-      cardErro.style.display = "none";
-    }
-  </script>
-</body>
+      function finalizarAguardar() {
+        document.getElementById("div_aguardar").style.display = "none";
+      }
+
+      function limparFormulario() {
+        document.getElementById("nome_input").value = "";
+        document.getElementById("email_input").value = "";
+        document.getElementById("senha_input").value = "";
+        document.getElementById("confirmacao_senha_input").value = "";
+      }
+
+      function sumirMensagem() {
+        cardErro.style.display = "none";
+      }
+
+      function mostrarMensagem(mensagem) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = mensagem;
+        finalizarAguardar();
+        clearTimeout(timerMensagem); 
+        timerMensagem = setTimeout(sumirMensagem, 5000);
+      }
+
+      function registrarErro(mensagem) {
+        tentativa++;
+        mostrarMensagem(mensagem);
+
+        if (tentativa >= maxTentativa && !timerBloqueio) {
+          timerBloqueio = setTimeout(() => {
+            tentativa = 0;
+            timerBloqueio = null;
+          }, tempoBloqueio);
+        }
+      }
+
+      function cadastrar() {
+        var nomeVar = nome_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        if (tentativa >= maxTentativa) {
+          mostrarMensagem(
+            `Muitas tentativas. Tente novamente em ${tempoBloqueio / 1000} segundos.`,
+          );
+          return false;
+        }
+
+        if (
+          nomeVar == "" ||
+          emailVar == "" ||
+          senhaVar == "" ||
+          confirmacaoSenhaVar == ""
+        ) {
+          registrarErro("Por favor, preencha todos os campos.");
+          return false;
+        }
+
+        if (confirmacaoSenhaVar !== senhaVar) {
+          registrarErro("As senhas são diferentes.");
+          return false;
+        }
+
+        if (!emailVar.includes("@") || !emailVar.includes(".com")) {
+          registrarErro("O email deve conter '@' e '.com'.");
+          return false;
+        }
+
+        if (senhaVar.length < 10) {
+          registrarErro("A senha deve ter no mínimo 10 caracteres.");
+          return false;
+        }
+
+        if (!document.getElementById("terms").checked) {
+          registrarErro("Você deve aceitar os termos de serviço.");
+          return false;
+        }
+
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+          }),
+        })
+          .then(function (resposta) {
+            if (resposta.ok) {
+              tentativa = 0; 
+              mostrarMensagem("Cadastro realizado com sucesso!");
+              setTimeout(() => {
+                window.location = "login.html";
+              }, 2000);
+              limparFormulario();
+            } else {
+              throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+          })
+          .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            mostrarMensagem("Erro ao realizar o cadastro. Tente novamente.");
+          });
+
+        return false;
+      }
+    </script>
+  </body>
 </html>
