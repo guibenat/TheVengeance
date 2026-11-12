@@ -32,7 +32,6 @@
 
       <div class="toggle-tabs">
         <button class="toggle-btn active">Email</button>
-        <button class="toggle-btn">Phone</button>
       </div>
 
       <div class="formulario">
@@ -43,11 +42,6 @@
         <div class="campo">
           <span>Password</span>
           <input id="senha_input" type="password" placeholder="******" />
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms">
-          <label for="terms">I agree to the <a href="#">terms of Service</a></label>
         </div>
 
         <button class="botao" onclick="entrar()">Sign in</button>
@@ -63,6 +57,7 @@
       <div id="div_erros_login"></div>
     <div class="right-panel">
       <div class="news-title">NEWS</div>
+    </div>
       
       <div class="carousel-wrapper">
         <div class="carousel-track" id="track">
@@ -127,7 +122,7 @@
         finalizarAguardar();
         return false;
       } else {
-        setInterval(sumirMensagem, 5000);
+        setTimeout(sumirMensagem, 5000);
       }
 
       console.log("FORM LOGIN: ", emailVar);
@@ -147,14 +142,13 @@
             sessionStorage.EMAIL_USUARIO = json.email;
             sessionStorage.NOME_USUARIO = json.nome;
             sessionStorage.ID_USUARIO = json.id;
-            sessionStorage.AQUARIOS = JSON.stringify(json.aquarios);
 
             cardErro.style.display = "block";
             cardErro.style.backgroundColor = "#28a745"; 
             mensagem_erro.innerHTML = "Login realizado com sucesso! Redirecionando...";
 
             setTimeout(function () {
-              window.location = "./dashboard/cards.html";
+              window.location = "./cards.html";
             }, 1000);
           });
         } else {
