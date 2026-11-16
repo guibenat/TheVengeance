@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Psicológica - Gotham</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <a href="index.html" class="link-logo">
+            <img src="./assets/icon/logo.png" alt="Logo Morcego" class="logo-morcego">
+        </a>
+        <button type="button" id="btn-reiniciar" class="btn-reiniciar">Reiniciar Quiz</button>
+    </header>
+
+    <main class="container-principal">
+        <section class="wrapper-quiz">
+
+            <!-- Barra de progresso segmentada em 10 etapas -->
+            <div id="barra-progresso" class="barra-progresso">
+                <div class="segmento ativo"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+                <div class="segmento"></div>
+            </div>
+
+            <!-- Card principal da pergunta -->
+            <article class="card-quiz">
+                <div class="card-faixa-topo"></div>
+
+                <div class="card-corpo">
+                    <div class="tag-caracteristica">
+                        <img id="icone-caracteristica" class="icone-caracteristica" src="" alt="">
+                        <span id="texto-caracteristica"></span>
+                    </div>
+
+                    <h1 id="texto-pergunta" class="titulo-pergunta"></h1>
+
+                    <div id="caixa-alternativas" class="lista-alternativas"></div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>
