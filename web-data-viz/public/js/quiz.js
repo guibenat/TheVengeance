@@ -209,8 +209,7 @@ async function finalizarQuiz() {
 
     console.log("Pontuação Final:", pontuacaoQuiz);
 
-    /* 
-    // Descomente quando a rota POST da sua API Node.js estiver pronta:
+   
     try {
         const resposta = await fetch('/resultados/cadastrar', {
             method: 'POST',
@@ -229,7 +228,6 @@ async function finalizarQuiz() {
     } catch (erro) {
         console.error("Erro ao enviar resultado do quiz:", erro);
     }
-    */
 }
 
 // 8. Botão Reiniciar Quiz

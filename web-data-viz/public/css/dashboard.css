@@ -1,0 +1,612 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Barlow Condensed', sans-serif;
+    min-height: 100vh;
+}
+
+img[src=""] {
+    opacity: 0;
+}
+
+.layout-dashboard {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* =========================================
+   SIDEBAR ESQUERDA (GRADIENTE VERMELHO)
+   ========================================= */
+.sidebar-perfil {
+    width: 335px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #420000 0%, #240000 52%, #3d0000 100%);
+    border-radius: 0 24px 24px 0;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.logo-morcego {
+    width: 64px;
+    height: auto;
+    display: block;
+}
+
+.perfil-match {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-principal {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.nome-personagem-principal {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+    min-height: 24px;
+}
+
+.container-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 280px;
+}
+
+.tag-pill {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 6px;
+}
+
+/* Card de Características na Sidebar */
+.card-sidebar-stats {
+    background-color: rgba(115, 0, 0, 0.45);
+    border-radius: 14px;
+    padding: 16px 18px;
+}
+
+.titulo-secao-sidebar {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.lista-barras-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Linha Padrão de Característica (Usada na Sidebar e no Card Principal) */
+.item-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.stat-info-esq {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icone-stat-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icone-stat-box img {
+    width: 13px;
+    height: 13px;
+    object-fit: contain;
+}
+
+.stat-nome {
+    font-size: 14px;
+    font-weight: 500;
+    color: #e5e5e5;
+}
+
+.stat-progresso-dir {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-valor {
+    font-size: 13px;
+    font-weight: 600;
+    color: #d4d4d4;
+    min-width: 28px;
+    text-align: right;
+}
+
+.trilho-barra {
+    width: 36px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.preenchimento-barra {
+    height: 100%;
+    border-radius: 99px;
+}
+
+/* Cores por Característica */
+.cor-moralidade .icone-stat-box { background-color: #e5e5e5; }
+.cor-moralidade .preenchimento-barra { background-color: #e5e5e5; }
+
+.cor-logica .icone-stat-box { background-color: #99f6e4; }
+.cor-logica .preenchimento-barra { background-color: #99f6e4; }
+
+.cor-trauma .icone-stat-box { background-color: #9333ea; }
+.cor-trauma .icone-stat-box img { filter: brightness(0) invert(1); }
+.cor-trauma .preenchimento-barra { background-color: #9333ea; }
+
+.cor-intimidacao .icone-stat-box { background-color: #f59e0b; }
+.cor-intimidacao .preenchimento-barra { background-color: #f59e0b; }
+
+.cor-brutalidade .icone-stat-box { background-color: #dc2626; }
+.cor-brutalidade .icone-stat-box img { filter: brightness(0) invert(1); }
+.cor-brutalidade .preenchimento-barra { background-color: #dc2626; }
+
+.cor-influencia .icone-stat-box { background-color: #10b981; }
+.cor-influencia .icone-stat-box img { filter: brightness(0) invert(1); }
+.cor-influencia .preenchimento-barra { background-color: #10b981; }
+
+/* Grid Inferior da Sidebar (Others + Nemesis) */
+.grid-inferior-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.titulo-fora-card {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.alinhar-direita {
+    text-align: right;
+}
+
+.card-sidebar-sub {
+    background-color: rgba(115, 0, 0, 0.45);
+    border-radius: 14px;
+    padding: 12px 10px;
+    min-height: 155px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-other-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.other-esq {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow: hidden;
+}
+
+.avatar-mini {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.nome-other-mini {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pct-other-mini {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.card-nemesis-mini {
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-nemesis-mini {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome-nemesis-mini {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.porcentagem-nemesis-mini {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.stats-nemesis-mini {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stats-nemesis-mini .stat-nome {
+    font-size: 12px;
+}
+
+.stats-nemesis-mini .trilho-barra {
+    width: 22px;
+}
+
+/* =========================================
+   ÁREA PRINCIPAL DIREITA
+   ========================================= */
+.conteudo-principal {
+    flex: 1;
+    padding: 20px 36px 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Navbar Superior */
+.navbar-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-links {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+}
+
+.nav-item {
+    color: #8f0000;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    transition: color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item.ativo {
+    color: #cc0000;
+}
+
+.icone-nav-centro {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    display: block;
+}
+
+.pill-usuario {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid #3a3a3a;
+    border-radius: 999px;
+    padding: 4px 28px 4px 6px;
+}
+
+.avatar-nav {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome-nav {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+/* Cabeçalho da Seção Similar Character */
+.cabecalho-secao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.icone-secao-bat {
+    width: 30px;
+    height: auto;
+}
+
+.titulo-secao-principal {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Cards Escuros Principais */
+.card-escuro {
+    background-color: #030303;
+    border: 1px solid #2b1414;
+    border-radius: 18px;
+    padding: 22px 32px;
+}
+
+.similar-topo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: center;
+}
+
+.similar-identidade {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.badge-alinhamento {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 3px 38px;
+    border-radius: 999px;
+}
+
+.badge-alinhamento.hero {
+    background: linear-gradient(90deg, #67e8f9 0%, #cffafe 100%);
+    color: #000000;
+}
+
+.badge-alinhamento.vilao {
+    background: linear-gradient(90deg, #7f1d1d 0%, #dc2626 100%);
+    color: #ffffff;
+}
+
+.similar-personagem-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-medio {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome-medio {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.similar-radar-box {
+    width: 100%;
+    height: 195px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.similar-match-box {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.circulo-match-vermelho {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background-color: #5c0000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.valor-match {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.label-match {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.divisor-horizontal {
+    width: 100%;
+    height: 1px;
+    background-color: #242424;
+    margin: 18px 0;
+}
+
+.subtitulo-card {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.grid-duas-colunas-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 64px;
+    row-gap: 12px;
+}
+
+/* Card Inferior: Nemesis + Others Similares */
+.subtitulo-card-grande {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.nemesis-grande-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nemesis-info-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-grande-nemesis {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome-grande-nemesis {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.descricao-nemesis {
+    font-size: 14px;
+    color: #a3a3a3;
+    max-width: 480px;
+}
+
+.circulo-match-branco {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.valor-match-escuro {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.label-match-escuro {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.grid-tres-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.card-other-item {
+    border: 1px solid #262626;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 102px;
+}
+
+.other-card-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+.other-subtitulo {
+    font-size: 12px;
+    color: #9ca3af;
+    display: block;
+}
+
+.other-nome {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.other-porcentagem {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* Responsividade */
+@media (max-width: 1100px) {
+    .layout-dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar-perfil {
+        width: 100%;
+        border-radius: 0 0 24px 24px;
+    }
+
+    .similar-topo-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .similar-match-box {
+        justify-content: flex-start;
+    }
+
+    .grid-duas-colunas-stats,
+    .grid-tres-cards {
+        grid-template-columns: 1fr;
+    }
+}
