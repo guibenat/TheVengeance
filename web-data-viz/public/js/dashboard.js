@@ -29,6 +29,8 @@ function criarHtmlItemStat(config, valor) {
     `;
 }
 
+// Grafico
+
 function renderizarRadarChart(statsUsuario) {
     const ctx = document.getElementById("radarChart").getContext("2d");
 
@@ -108,7 +110,6 @@ function renderizarRadarChart(statsUsuario) {
 function preencherDashboard(dados) {
     const { statsUsuario, similar, outros, oposto } = dados;
 
-    // 1. Navbar Superior (Nome do usuário + Avatar do match principal)
     const nomeUsuarioLogado = sessionStorage.NOME_USUARIO || "USUÁRIO";
     document.getElementById("nav-nome-usuario").innerText = nomeUsuarioLogado;
 
@@ -116,7 +117,6 @@ function preencherDashboard(dados) {
     navAvatar.src = similar.imagemUrl;
     navAvatar.alt = similar.nome;
 
-    // 2. Painel Esquerdo: Avatar, Nome e Tags do Personagem Similar
     const sidebarAvatar = document.getElementById("sidebar-avatar");
     sidebarAvatar.src = similar.imagemUrl;
     sidebarAvatar.alt = similar.nome;
@@ -129,13 +129,11 @@ function preencherDashboard(dados) {
         containerTags.innerHTML += `<span class="tag-pill">${tag.trim()}</span>`;
     });
 
-    // 3. Barras de Características do Usuário na Sidebar
     const listaStatsUsuario = document.getElementById("lista-stats-usuario");
     listaStatsUsuario.innerHTML = CONFIG_CARACTERISTICAS
         .map(cfg => criarHtmlItemStat(cfg, statsUsuario[cfg.chave]))
         .join("");
 
-    // 4. Lista "Others" na Sidebar (3 personagens intermediários)
     const sidebarOthers = document.getElementById("sidebar-others");
     sidebarOthers.innerHTML = outros.slice(0, 3).map(personagem => `
         <div class="item-other-sidebar">
@@ -147,7 +145,6 @@ function preencherDashboard(dados) {
         </div>
     `).join("");
 
-    // 5. Mini Card "Nemesis" na Sidebar (Imagem + 2 atributos mais fortes do Nemesis)
     const sidebarNemesisAvatar = document.getElementById("sidebar-nemesis-avatar");
     sidebarNemesisAvatar.src = oposto.imagemUrl;
     sidebarNemesisAvatar.alt = oposto.nome;
@@ -164,7 +161,6 @@ function preencherDashboard(dados) {
         .map(cfg => criarHtmlItemStat(cfg, statsOposto[cfg.chave]))
         .join("");
 
-    // 6. Card Principal Direito: Similar Character
     const badgeAlinhamento = document.getElementById("similar-badge-alinhamento");
     badgeAlinhamento.innerText = similar.alinhamento === "Vilão" ? "Villain" : "Hero";
     badgeAlinhamento.className = `badge-alinhamento ${similar.alinhamento === "Vilão" ? "vilao" : "hero"}`;
@@ -187,7 +183,6 @@ function preencherDashboard(dados) {
 
     renderizarRadarChart(statsUsuario);
 
-    // 7. Card Inferior Direito: Nemesis + 3 Cards Others Similares
     const mainNemesisAvatar = document.getElementById("main-nemesis-avatar");
     mainNemesisAvatar.src = oposto.imagemUrl;
     mainNemesisAvatar.alt = oposto.nome;

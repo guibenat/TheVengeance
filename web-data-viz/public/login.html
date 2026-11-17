@@ -25,7 +25,6 @@
 
   <div class="container">
     <div class="left-panel">
-      <img src="./assets/icon/logo.png" alt="Logo The Vengeance" class="logo" />
 
       <h1>Login</h1>
       <p class="subtitle">Enter your credentials to access your account</p>
@@ -45,7 +44,7 @@
         </div>
 
         <button class="botao" onclick="entrar()">Sign in</button>
-        
+
         <div style="margin-top: 15px; font-size: 0.85rem; text-align: center; color: #ccc;">
           Don't have an account? <a href="cadastro.html" style="color: #e52421; text-decoration: none; font-weight: bold;">Sign up</a>
         </div>
@@ -55,10 +54,11 @@
         <div class="spinner"></div>
       </div>
       <div id="div_erros_login"></div>
+    </div>
+
     <div class="right-panel">
       <div class="news-title">NEWS</div>
-    </div>
-      
+
       <div class="carousel-wrapper">
         <div class="carousel-track" id="track">
           <img src="assets/imgs/penguinPoster.png" alt="News 1">
@@ -66,6 +66,7 @@
           <img src="assets/imgs/caraDeBarroPoster.png" alt="News 3">
         </div>
       </div>
+
       <div class="indicators" id="indicators">
         <div class="dot active"><div class="dot-fill"></div></div>
         <div class="dot"><div class="dot-fill"></div></div>
@@ -73,11 +74,12 @@
       </div>
     </div>
   </div>
+
   <script>
     const track = document.getElementById('track');
     const dots = document.querySelectorAll('.dot');
     let slideAtual = 0;
-    const tempoIntervalo = 5000; 
+    const tempoIntervalo = 5000;
 
     function moverCarrossel() {
       slideAtual = (slideAtual + 1) % dots.length;
@@ -85,20 +87,20 @@
 
       dots.forEach(dot => {
         dot.classList.remove('active');
-        void dot.offsetWidth; 
+        void dot.offsetWidth;
       });
       dots[slideAtual].classList.add('active');
     }
     setInterval(moverCarrossel, tempoIntervalo);
 
-    // --- Lógica de Autenticação
+    // --- Lógica de Autenticação ---
     function aguardar() {
       document.getElementById('div_aguardar').style.display = 'flex';
     }
 
     function finalizarAguardar(texto) {
       document.getElementById('div_aguardar').style.display = 'none';
-      if(texto) {
+      if (texto) {
         document.getElementById('div_erros_login').innerHTML = texto;
       }
     }
@@ -120,9 +122,8 @@
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
         finalizarAguardar();
-        return false;
-      } else {
         setTimeout(sumirMensagem, 5000);
+        return false;
       }
 
       console.log("FORM LOGIN: ", emailVar);
@@ -144,7 +145,7 @@
             sessionStorage.ID_USUARIO = json.id;
 
             cardErro.style.display = "block";
-            cardErro.style.backgroundColor = "#28a745"; 
+            cardErro.style.backgroundColor = "#28a745";
             mensagem_erro.innerHTML = "Login realizado com sucesso! Redirecionando...";
 
             setTimeout(function () {
@@ -157,6 +158,7 @@
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "E-mail e/ou senha inválidos.";
             finalizarAguardar(texto);
+            setTimeout(sumirMensagem, 5000);
           });
         }
       }).catch(function (erro) {
@@ -168,4 +170,5 @@
     }
   </script>
 </body>
+
 </html>

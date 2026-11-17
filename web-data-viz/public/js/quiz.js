@@ -9,7 +9,6 @@ let pontuacaoQuiz = {
 
 let indicePerguntaAtual = 0;
 
-// 2. Mapeamento dos ícones (imagens) de cada característica
 const iconesCaracteristicas = {
     Moralidade: "./assets/icon/moralidade.png",
     Lógica: "./assets/icon/logica.png",
@@ -19,7 +18,7 @@ const iconesCaracteristicas = {
     Brutalidade: "./assets/icon/brutalidade.png"
 };
 
-// 3. Banco de 10 perguntas (4 alternativas cada)
+// Perguntas
 const perguntas = [
     {
         caracteristica: "Moralidade",
@@ -123,7 +122,6 @@ const perguntas = [
     }
 ];
 
-// 4. Restaura progresso caso o usuário recarregue a página no meio do quiz
 function carregarProgressoSalvo() {
     const pontuacaoSalva = sessionStorage.getItem('pontuacaoParcial');
     const indiceSalvo = sessionStorage.getItem('indicePerguntaAtual');
@@ -137,7 +135,6 @@ function carregarProgressoSalvo() {
     }
 }
 
-// 5. Renderiza a pergunta atual, ícone, barra de progresso e alternativas
 function renderizarPergunta() {
     const perguntaAtual = perguntas[indicePerguntaAtual];
     const iconeElemento = document.getElementById('icone-caracteristica');
@@ -150,7 +147,6 @@ function renderizarPergunta() {
     document.getElementById('texto-caracteristica').innerText = perguntaAtual.caracteristica;
     document.getElementById('texto-pergunta').innerText = perguntaAtual.texto;
 
-    // Atualiza os 10 segmentos da barra de progresso
     const segmentos = document.querySelectorAll('.segmento');
     segmentos.forEach((segmento, index) => {
         if (index <= indicePerguntaAtual) {
@@ -160,7 +156,6 @@ function renderizarPergunta() {
         }
     });
 
-    // Limpa e gera os botões das 4 alternativas
     const caixaAlternativas = document.getElementById('caixa-alternativas');
     caixaAlternativas.innerHTML = '';
 
@@ -172,21 +167,15 @@ function renderizarPergunta() {
             <span>${resposta.texto}</span>
             <span class="radio-indicador"></span>
         `;
-
         botao.addEventListener('click', () => registrarResposta(resposta.impacto));
         caixaAlternativas.appendChild(botao);
     });
 }
-
-// 6. Soma os pontos da resposta escolhida e avança
 function registrarResposta(impacto) {
     for (let traco in impacto) {
         pontuacaoQuiz[traco] += impacto[traco];
     }
-
     indicePerguntaAtual++;
-
-    // Salva backup no sessionStorage
     sessionStorage.setItem('pontuacaoParcial', JSON.stringify(pontuacaoQuiz));
     sessionStorage.setItem('indicePerguntaAtual', indicePerguntaAtual);
 
@@ -196,8 +185,6 @@ function registrarResposta(impacto) {
         finalizarQuiz();
     }
 }
-
-// 7. Finaliza o quiz e prepara o envio para o back-end
 async function finalizarQuiz() {
     document.getElementById('icone-caracteristica').classList.add('oculto');
     document.getElementById('texto-caracteristica').innerText = "Concluído";
@@ -208,8 +195,6 @@ async function finalizarQuiz() {
     sessionStorage.removeItem('indicePerguntaAtual');
 
     console.log("Pontuação Final:", pontuacaoQuiz);
-
-   
     try {
         const resposta = await fetch('/resultados/cadastrar', {
             method: 'POST',
@@ -230,7 +215,6 @@ async function finalizarQuiz() {
     }
 }
 
-// 8. Botão Reiniciar Quiz
 document.getElementById('btn-reiniciar').addEventListener('click', () => {
     pontuacaoQuiz = {
         logica: 0,
@@ -248,6 +232,5 @@ document.getElementById('btn-reiniciar').addEventListener('click', () => {
     renderizarPergunta();
 });
 
-// Inicialização
 carregarProgressoSalvo();
 renderizarPergunta();
