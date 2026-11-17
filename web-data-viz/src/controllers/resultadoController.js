@@ -1,12 +1,12 @@
 var resultadoModel = require("../models/resultadoModel");
 
 const TETO_PONTOS = {
-    logica: 91,
-    trauma: 59,
-    brutalidade: 85,
-    influencia: 94,
-    intimidacao: 78,
-    moralidade: 89
+    logica: 42,
+    trauma: 40,
+    brutalidade: 42,
+    influencia: 42,
+    intimidacao: 40,
+    moralidade: 42
 };
 
 function normalizarPontuacao(bruta) {
